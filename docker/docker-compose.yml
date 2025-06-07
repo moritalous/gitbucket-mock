@@ -1,0 +1,15 @@
+services:
+  gitbucket:
+    build: .
+    # network_mode: host    # Use host network mode
+    volumes:
+      - ./gitbucket-data:/var/gitbucket
+    environment:
+      # Example of configuring Java options
+      - JAVA_OPTS=-Xmx1g
+      # Example of configuring GitBucket options
+      - GITBUCKET_MAXFILESIZE=10485760
+    ports:
+      - "8080:8080"  # Map host port 8080 to container port 8080
+      - "29418:29418"  # Map host port 29418 to container port 29418
+    restart: unless-stopped
